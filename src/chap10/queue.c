@@ -79,7 +79,11 @@ int main() {
 
   generate_array(array, n);
   print_array(array, n);
-  init_queue(&q, n);
+  if (!init_queue(&q, n)) {
+    printf("allocate memory failed\n");
+    exit(0);
+  }
+
   while (i < n) {
     r = rand() % n;
     if (queue_empty(&q) || r < n / 2) {

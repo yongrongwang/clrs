@@ -69,6 +69,7 @@ int main() {
     printf("allocate memory failed\n");
     exit(0);
   }
+
   while (i < n) {
     r = rand() % n;
     if (stack_empty(&s) || r < n / 2) {
