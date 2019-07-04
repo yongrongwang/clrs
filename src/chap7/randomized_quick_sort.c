@@ -21,11 +21,18 @@ int partition(int array[], int p, int r) {
   return i;
 }
 
-void quick_sort(int array[], int p, int r) {
+int randomized_partition(int array[], int p, int r) {
+  srand((unsigned int) time(NULL));
+  int i = p + rand() % (r - p + 1);
+  swap(&array[i], &array[r]);
+  return partition(array, p, r);
+}
+
+void randomized_quick_sort (int array[], int p, int r) {
   if (p < r) {
-    int q = partition(array, p, r);
-    quick_sort(array, p, q - 1);
-    quick_sort(array, q + 1, r);
+    int q = randomized_partition(array, p, r);
+    randomized_quick_sort(array, p, q - 1);
+    randomized_quick_sort(array, q + 1, r);
   }
 }
 
@@ -49,7 +56,7 @@ int main() {
 
   generate_array(array, n);
   print_array(array, n);
-  quick_sort(array, 0, n - 1);
+  randomized_quick_sort(array, 0, n - 1);
   print_array(array, n);
 
   return 0;

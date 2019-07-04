@@ -47,22 +47,29 @@ void heap_sort(int array[], int length) {
     max_heapify(array, 1);
   }
 }
+void generate_array(int array[], int length) {
+  int i;
+  srand((unsigned int) time(NULL));
+  for (i = 1; i <= length; i++)
+    array[i] = rand() % length;
+}
+
+void print_array(int array[], int length) {
+  int i;
+  for (i = 1; i <= length; i++)
+    printf("%d ", array[i]);
+  printf("\n");
+}
+
 
 int main() {
-  int i, n = 10;
+  int n = 10;
   int array[n + 1];
 
-  srand((unsigned int) time(NULL));
-  for (i = 1; i <= n; i++) {
-    array[i] = rand() % n;
-    printf("%d ", array[i]);
-  }
-  printf("\n");
-
+  generate_array(array, n);
+  print_array(array, n);
   heap_sort(array, n);
-  for (i = 1; i <= n; i++)
-    printf("%d ", array[i]);
-  printf("\n");
+  print_array(array, n);
 
   return 0;
 }

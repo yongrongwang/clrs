@@ -10,14 +10,6 @@
 
 int heap_size;
 
-void print_heap(int array[]) {
-  int i;
-  for (i = 1; i <= heap_size; i++)
-    printf("%d ", array[i]);
-  printf("\n");
-
-}
-
 void swap(int *a, int *b) {
   int t = *a;
   *a = *b;
@@ -80,19 +72,34 @@ void max_heap_insert(int array[], int key) {
   heap_increase_key(array, heap_size, key);
 }
 
-
-
-int main() {
-  int i, n = 10, max, key, key2, index;
-  int array[n + 1];
-
+void generate_array(int array[], int length) {
+  int i;
   srand((unsigned int) time(NULL));
-  for (i = 1; i <= n; i++) {
-    array[i] = rand() % n;
+  for (i = 1; i <= length; i++)
+    array[i] = rand() % length;
+}
+
+void print_array(int array[], int length) {
+  int i;
+  for (i = 1; i <= length; i++)
     printf("%d ", array[i]);
-  }
+  printf("\n");
+}
+
+void print_heap(int array[]) {
+  int i;
+  for (i = 1; i <= heap_size; i++)
+    printf("%d ", array[i]);
   printf("\n");
 
+}
+
+int main() {
+  int n = 10, max, key, key2, index;
+  int array[n + 1];
+
+  generate_array(array, n);
+  print_array(array, n);
   build_max_heap(array, n);
   max = heap_maximum(array);
   printf("max = %d\n", max);

@@ -33,21 +33,28 @@ void merge_sort(int array[], int p, int r) {
   }
 }
 
+void generate_array(int array[], int length) {
+  int i;
+  srand((unsigned int) time(NULL));
+  for (i = 0; i < length; i++)
+    array[i] = rand() % length;
+}
+
+void print_array(int array[], int length) {
+  int i;
+  for (i = 0; i < length; i++)
+    printf("%d ", array[i]);
+  printf("\n");
+}
+
 int main() {
-  int i, n = 10;
+  int n = 10;
   int array[n];
 
-  srand((unsigned int) time(NULL));
-  for (i = 0; i < n; i++) {
-    array[i] = rand() % n;
-    printf("%d ", array[i]);
-  }
-  printf("\n");
-
+  generate_array(array, n);
+  print_array(array, n);
   merge_sort(array, 0, n - 1);
-  for (i = 0; i < n; i++)
-    printf("%d ", array[i]);
-  printf("\n");
+  print_array(array, n);
 
   return 0;
 }

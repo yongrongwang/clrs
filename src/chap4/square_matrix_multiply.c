@@ -15,40 +15,38 @@ void square_matrix_multiply(int n, int a[n][n], int b[n][n], int c[n][n]) {
   }
 }
 
-int main() {
-  int i, j, n = 10;
-  int a[n][n], b[n][n], c[n][n];
-
+void generate_2d_array(int n, int a[n][n]) {
+  int i, j;
   srand((unsigned int) time(NULL));
   for (i = 0; i < n; i++) {
     for (j = 0; j < n; j++) {
       a[i][j] = rand() % n;
-      printf("%d ", a[i][j]);
     }
-    printf("\n");
   }
-  printf("\n");
-  for (i = 0; i < n; i++) {
-    for (j = 0; j < n; j++) {
-      b[i][j] = rand() % n;
-      printf("%d ", b[i][j]);
-    }
-    printf("\n");
-  }
-  printf("\n");
+}
 
-  square_matrix_multiply(n, a, b, c);
+void print_2d_arrary(int n, int a[n][n]) {
+  int i, j;
+  srand((unsigned int) time(NULL));
   for (i = 0; i < n; i++) {
     for (j = 0; j < n; j++) {
-      printf("%d ", c[i][j]);
-      if (c[i][j] < 10)
-        printf(" ");
-      if (c[i][j] < 100)
-        printf(" ");
+      printf("%3d ", a[i][j]);
     }
     printf("\n");
   }
   printf("\n");
+}
+
+int main() {
+  int n = 10;
+  int a[n][n], b[n][n], c[n][n];
+
+  generate_2d_array(n, a);
+  print_2d_arrary(n, a);
+  generate_2d_array(n, b);
+  print_2d_arrary(n, b);
+  square_matrix_multiply(n, a, b, c);
+  print_2d_arrary(n, c);
 
   return 0;
 }

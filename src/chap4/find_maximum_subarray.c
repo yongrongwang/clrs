@@ -48,20 +48,30 @@ max_subarray find_maximum_subarray(int array[], int low, int high) {
   }
 }
 
+void generate_array(int array[], int length) {
+  int i;
+  srand((unsigned int) time(NULL));
+  for (i = 0; i < length; i++) {
+    if (i % 2 == 0)
+      array[i] = -(rand() % length);
+    else
+      array[i] = rand() % length;
+  }
+}
+
+void print_array(int array[], int length) {
+  int i;
+  for (i = 0; i < length; i++)
+    printf("%d ", array[i]);
+  printf("\n");
+}
+
 int main() {
-  int i, n = 10;
+  int n = 10;
   int array[n];
 
-  srand((unsigned int) time(NULL));
-  for (i = 0; i < n; i++) {
-    if (i % 2 == 0)
-      array[i] = -(rand() % n);
-    else
-      array[i] = rand() % n;
-    printf("%d ", array[i]);
-  }
-  printf("\n");
-
+  generate_array(array, n);
+  print_array(array, n);
   max_subarray max = find_maximum_subarray(array, 0, n - 1);
   printf("low = %d, high = %d, sum = %d", max.left, max.right, max.sum);
   printf("\n");

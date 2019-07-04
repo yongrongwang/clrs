@@ -1,17 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <limits.h>
 
-void insertion_sort(int array[], int length) {
-  int key, i, j;
-
-  for (i = 1; i < length; i++) {
-    key = array[i];
-    for (j = i - 1; j >= 0 && key < array[j]; j--) {
-      array[j + 1] = array[j];
-    }
-    array[j + 1] = key;
-  }
+int minimum(int array[], int length) {
+  int i, min = array[0];
+  for (i = 1; i < length; i++)
+    if (array[i] < min)
+      min = array[i];
+  return min;
 }
 
 void generate_array(int array[], int length) {
@@ -29,13 +26,13 @@ void print_array(int array[], int length) {
 }
 
 int main() {
-  int n = 10;
+  int min, n = 10;
   int array[n];
 
   generate_array(array, n);
   print_array(array, n);
-  insertion_sort(array, n);
-  print_array(array, n);
+  min = minimum(array, n);
+  printf("min = %d\n", min);
 
   return 0;
 }
