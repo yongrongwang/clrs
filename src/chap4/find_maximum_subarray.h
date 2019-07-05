@@ -1,5 +1,5 @@
-#ifndef FIND_MAXIMUM_SUBARRAY
-#define FIND_MAXIMUM_SUBARRAY
+#ifndef FIND_MAXIMUM_SUBARRAY_H
+#define FIND_MAXIMUM_SUBARRAY_H
 
 typedef struct max{
   int left;
