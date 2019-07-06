@@ -38,7 +38,7 @@ void list_insert(sen_list *l, node *x) {
   l->nil->next = x;
 }
 
-void list_delete(sen_list *l, node *x) {
+void list_delete(node *x) {
   x->prev->next = x->next;
   x->next->prev = x->prev;
 }
@@ -98,7 +98,7 @@ int main() {
     printf("search = %d, result = %d\n", array[i], x->key);
   }
   for (i = 0; i < n; i++) {
-    list_delete(&l, &nodes[i]);
+    list_delete(&nodes[i]);
     print_list(&l);
   }
 
