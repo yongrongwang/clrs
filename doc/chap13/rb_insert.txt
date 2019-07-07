@@ -1,0 +1,51 @@
+rb_insert(t, z)
+  y = t.nil
+  x = t.root
+  while x != t.nil
+    y = x
+    if z.key < x.key
+      x = x.left
+    else
+      x = x.right
+  z.p = y
+  if y == t.nil
+    t.root = z
+  else if z.key < y.key
+    y.left = z
+  else
+    y.right = z
+  z.left = t.nil
+  z.right = t.nil
+  z.color = RED
+  rb_insert_fixup(t, z)
+
+
+rb_insert_fixup(t, z)
+  while z.p.color == RED
+    if z.p = z.p.p.left
+      y = z.p.p.right
+      if y.color == RED
+        z.p.color = BLACK
+        y.color = BLACK
+        z.p.p.color = RED
+        z = z.p.p
+      else if z == z.p.right
+        z = z.p
+        left_rotate(t, z)
+      z.p.color = BLACK
+      z.p.p.color = RED
+      right_rotate(t, z.p.p)
+    else
+      y = z.p.p.left
+      if y.color = RED
+        z.p.color = BLACK
+        y.color = BLACK
+        z.p.p.color = RED
+        z = z.p.p
+      else if z = z.p.left
+        z = z.p
+        right_rotate(t, z)
+      z.p.color = BLACK
+      z.p.p.color = RED
+      left_rotate(t, z.p.p)
+  t.root.color = BLACK

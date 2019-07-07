@@ -1,0 +1,43 @@
+tree_insert(t,z)
+  y = NIL
+  x = t.root
+  while x != NIL
+    y = x
+    if z.key < x.key
+      x = x.left
+    else
+      x = x.right
+  z.p = y
+  if y == NIL
+    t.root = z
+  if z.key < y.key
+    y.left = z
+  else
+    y.right = z
+
+
+transplant(t, u, v)
+  if u.p == NIL
+    t.root = v
+  if u.p.left == u
+    u.p.left = v
+  else
+    u.p.right = v
+  if v != NIL
+    v.p = u.p
+
+
+tree_delete(t, z)
+  if z.left == NIL
+    transplant(t, z, z.right)
+  else if z.right == NIL
+    transplant(t, z, z.left)
+  else
+    y = tree_minimum(z.right)
+    if y.p != z 
+      transplant(t, y, y.right)
+      y.right = z.right
+      y.right.p = y
+    transplant(t, z, y)
+    y.left = z.left
+    y.left.p = y
