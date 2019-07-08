@@ -1,0 +1,80 @@
+rb_transplant(t, u, v)
+  if u.p == t.nil
+    t.root = v
+  else if u.p.left == u
+    u.p.left = v
+  else
+    u.p.right = v
+  v.p = u.p
+
+
+rb_delete(t, z)
+  y = z
+  y_original_color = y.color
+  if z.left == t.nil
+    x = z.right
+    rb_transplant(t, z, z.right)
+  else if z.right == t.nil
+    x = z.left
+    rb_transplant(t, z, z.left)
+  else
+    y = tree_minimum(z.right)
+    y_original_color = y.color
+    x = y.right
+    if y.p == z
+      x.p = y
+    else
+      rb_transplant(t, y, y.right)
+      y.right = z.right
+      y.right.p = y
+    rb_transplant(t, z, y)
+    y.left = z.left
+    y.left.p = y
+    y.color = z.color
+  if y_orginal_color == BLACK
+    rb_delete_fixup(t, x)
+
+
+rb_delete_fixup(t, x)
+  while x != t.root && x.color == BLACK
+    if x == x.p.left
+      w = x.p.right
+      if w.color == RED
+        w.color = BLACK
+        x.p.color = RED
+        left_ratate(t, x.p)
+        w = x.p.right
+      else if w.left.color == BLACK && w.right.color == BLACK
+        w.color = RED
+        x = x.p
+      else if w.right.color == BLACK
+        w.color = RED
+        w.left.color = BLACK
+        right_rotate(t, w)
+        w = x.p.right
+      w.color = x.p.color
+      x.p.color = BLACK
+      w.right.color = BLACK
+      left_rotate(t, x.p)
+      x = t.root
+    else
+      w = x.p.left
+      if w.color = RED
+        w.color = BLACK
+        x.p.color = RED
+        right_rotate(t, x.p)
+        w = x.p.left
+      else if w.left.color == BLACK && w.right.color == BLACK
+        w.color = RED
+        x = x.p
+      else if w.left.color == BLACK
+        w.color = RED
+        w.right.color = BLACK
+        left_rotate(t, w)
+        w = x.p.left
+      w.color = x.p.color
+      x.p.color = BLACK
+      w.left.color = BLACK
+      right_rotate(t, x.p)
+      x = t.root
+  x.color = BLACK
